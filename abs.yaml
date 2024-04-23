@@ -1,0 +1,5 @@
+aggregate_check: False
+
+# destination upon merge
+upload_channels:
+  - ai-staging
