@@ -1,0 +1,54 @@
+{% set name = "datadog-api-client" %}
+{% set version = "2.24.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/datadog_api_client-{{ version }}.tar.gz
+  sha256: 63f4fe3c5876da73d5162678567b941a56f3f42fac1477307c478662a06e1ea3
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.7
+    - setuptools-scm
+    - setuptools >=30.3.0
+    - pip
+    - wheel
+  run:
+    - python >=3.7
+    - urllib3 >=1.15
+    - certifi
+    - python-dateutil
+    - typing-extensions >=4.0.0
+  run_constrained:
+    - ddtrace >=1.15.0
+    - aiosonic ==0.15.1
+
+test:
+  imports:
+    - datadog_api_client
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/DataDog/datadog-api-client-python
+  summary: Python client for the Datadog API
+  description: Python client for the Datadog API
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  dev_url: https://github.com/DataDog/datadog-api-client-python
+  doc_url: https://datadoghq.dev/datadog-api-client-python/
+
+extra:
+  recipe-maintainers:
+    - cbouss
